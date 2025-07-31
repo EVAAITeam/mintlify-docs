@@ -11,62 +11,38 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Documentation",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "Overview",
+              "Vision",
+              "Roadmap"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Products",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "Instinct",
+              "Intel",
+              "API",
+              "Sentinel"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Miscellaneous",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "Tokenomics",
+              "Educational Resources",
+              "Glossary",
+              "FAQs",
+              "Links",
+              "Contracts"
             ]
           }
         ]
       },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      }
     ],
     "global": {
       "anchors": [
@@ -76,14 +52,19 @@
           "icon": "book-open-cover"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "anchor": "Website",
+          "href": "https://mintlify.com/blog",
+          "icon": "globe"
         },
         {
-          "anchor": "Blog",
+          "anchor": "Telegram",
+          "href": "https://mintlify.com/community",
+          "icon": "telegram"
+        },
+        {
+          "anchor": "X",
           "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "icon": "x"
         }
       ]
     }
