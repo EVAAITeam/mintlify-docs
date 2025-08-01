@@ -11,12 +11,12 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Docs",
+        "tab": "Welcome to EVA AI",
         "groups": [
           {
             "group": "Documentation",
             "pages": [
-              "Overview",
+              "Introduction",
               "Vision",
               "Roadmap"
             ]
