@@ -1,13 +1,13 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Mint Starter Kit",
   "colors": {
     "primary": "#f7941d",
     "light": "#f7941d",
     "dark": "#f7941d"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/eva-logo.png",
   "navigation": {
     "tabs": [
       {
@@ -47,23 +47,18 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
           "anchor": "Website",
-          "href": "https://mintlify.com/blog",
+          "href": "https://eva-ai.cloud",
           "icon": "globe"
         },
         {
           "anchor": "Telegram",
-          "href": "https://mintlify.com/community",
+          "href": "https://t.me/eva_AI_eth",
           "icon": "telegram"
         },
         {
           "anchor": "X",
-          "href": "https://mintlify.com/blog",
+          "href": "https://x.com/EVA_AI_2024",
           "icon": "x"
         }
       ]
@@ -77,13 +72,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:evaaiteam@gmail.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get $EVA",
+      "href": "https://app.uniswap.org/explore/tokens/ethereum/0x3566c8ee9780245e974e759a7716ea6ba0702588"
     }
   },
   "contextual": {
@@ -100,9 +95,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/EVA_AI_2024",
+      "telegram": "https://t.me/eva_AI_eth"
     }
   }
 }
