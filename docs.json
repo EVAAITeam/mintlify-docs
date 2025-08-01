@@ -43,32 +43,7 @@
           }
         ]
       },
-      {
-        "tab": "User Manuals",
-        "groups": [
-          {
-            "group": "Products",
-            "pages": [
-              "products-um/Instict",
-              {
-              "group": "Intel",
-              "pages": ["products-um/New Launches","products-um/Social Updates" ]
-            },
-              "products-um/API",
-              "products-um/Sentinel"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      }
+
     ],
     "global": {
       "anchors": [
