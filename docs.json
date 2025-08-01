@@ -1,21 +1,22 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
-  "name": "Mint Starter Kit",
+  "name": "EVA AI",
   "colors": {
     "primary": "#f7941d",
     "light": "#f7941d",
     "dark": "#f7941d"
   },
-  "favicon": "/eva-logo.png",
+  "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
+        "tab": "EVA AI",
         "groups": [
           {
             "group": "Welcome to EVA AI",
             "pages": [
-              "Introduction",
+              "Overview",
               "Vision",
               "Roadmap"
             ]
@@ -33,11 +34,37 @@
             "group": "Miscellaneous",
             "pages": [
               "Tokenomics",
-              "EducationalResources",
+              "Educational Resources",
               "Glossary",
               "FAQs",
               "Links",
               "Contracts"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "User Manuals",
+        "groups": [
+          {
+            "group": "Products",
+            "pages": [
+              "products-um/Instict",
+              {
+              "group": "Intel",
+              "pages": ["products-um/New Launches","products-um/Social Updates" ]
+            },
+              "products-um/API",
+              "products-um/Sentinel"
+            ]
+          },
+          {
+            "group": "Endpoint examples",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/create",
+              "api-reference/endpoint/delete",
+              "api-reference/endpoint/webhook"
             ]
           }
         ]
@@ -46,26 +73,26 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Website",
-          "href": "https://eva-ai.cloud",
-          "icon": "globe"
+          "anchor": "Documentation",
+          "href": "https://mintlify.com/docs",
+          "icon": "book-open-cover"
         },
         {
           "anchor": "Telegram",
-          "href": "https://t.me/eva_AI_eth",
+          "href": "https://mintlify.com/community",
           "icon": "telegram"
         },
         {
-          "anchor": "X",
-          "href": "https://x.com/EVA_AI_2024",
-          "icon": "x"
+          "anchor": "Blog",
+          "href": "https://mintlify.com/blog",
+          "icon": "newspaper"
         }
       ]
     }
   },
   "logo": {
-    "light": "eva_logo_2.png",
-    "dark": "eva_logo_2.png"
+    "light": "/eva_logo_2.png",
+    "dark": "/eva_logo_2.png"
   },
   "navbar": {
     "links": [
@@ -80,22 +107,11 @@
       "href": "https://app.uniswap.org/explore/tokens/ethereum/0x3566c8ee9780245e974e759a7716ea6ba0702588"
     }
   },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
   "footer": {
     "socials": {
-      "x": "https://x.com/EVA_AI_2024",
-      "telegram": "https://t.me/eva_AI_eth"
+      "x": "https://x.com/eva_ai_2024",
+      "telegram": "https://t.me/eva_AI_eth",
+      "website":"https://eva-ai.cloud"
     }
   }
 }
