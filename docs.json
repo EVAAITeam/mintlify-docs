@@ -11,10 +11,9 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Welcome to EVA AI",
         "groups": [
           {
-            "group": "Documentation",
+            "group": "Welcome to EVA AI",
             "pages": [
               "Introduction",
               "Vision",
