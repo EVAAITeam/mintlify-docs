@@ -34,8 +34,13 @@
             "group": "User Manuals",
             "pages": [
               "UserManuals/Instinct",
+              {
+            "group": "Intel",
+            "pages": [
               "UserManuals/Intel/NewLaunches",
-              "UserManuals/Intel/SocialUpdates",
+              "UserManuals/Intel/SocialUpdates"
+            ]
+          },
               "UserManuals/API",
               "UserManuals/Sentinel"
             ]
