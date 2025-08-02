@@ -31,6 +31,16 @@
             ]
           },
           {
+            "group": "User Manuals",
+            "pages": [
+              "UserManuals/Instinct",
+              "UserManuals/Intel/NewLaunches",
+              "UserManuals/Intel/SocialUpdates",
+              "UserManuals/API",
+              "UserManuals/Sentinel"
+            ]
+          },
+          {
             "group": "Miscellaneous",
             "pages": [
               "Tokenomics",
