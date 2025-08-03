@@ -16,6 +16,7 @@
           {
             "group": "Welcome to EVA AI",
             "pages": [
+              "$EVA Token",
               "Introduction",
               "Vision",
               "Roadmap"
