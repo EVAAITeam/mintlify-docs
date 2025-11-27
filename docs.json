@@ -25,26 +25,12 @@
           {
       "group": "Products",
       "pages": [
-        "Products/Instinct.mdx",
-        "Products/Intel.mdx",
-        "Products/Sentinel.mdx"
+        "Products/Instinct",
+        "Products/Intel",
+        "Products/Sentinel"
       ]
     },
-          {
-            "group": "User Manuals",
-            "pages": [
-              "UserManuals/Instinct",
-              {
-            "group": "Intel",
-            "pages": [
-              "UserManuals/Intel/NewLaunches",
-              "UserManuals/Intel/SocialUpdates"
-            ]
-          },
-              "UserManuals/API",
-              "UserManuals/Sentinel"
-            ]
-          },
+          
           {
             "group": "Miscellaneous",
             "pages": [
