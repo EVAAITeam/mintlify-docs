@@ -23,14 +23,13 @@
             ]
           },
           {
-            "group": "Products",
-            "pages": [
-              "Instinct",
-              "Products/Intel",
-              "API",
-              "EVA App"
-            ]
-          },
+      "group": "Products",
+      "pages": [
+        "Products/Instinct.mdx",
+        "Products/Intel.mdx",
+        "Products/Sentinel.mdx"
+      ]
+    },
           {
             "group": "User Manuals",
             "pages": [
