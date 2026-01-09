@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "EVA API",
-    "description": "Comprehensive smart contract security analysis API with AI-powered threat detection across 18+ EVM blockchain networks.",
+    "description": "Comprehensive smart contract security analysis API with AI-powered threat detection across 18+ EVM blockchain networks.\n\n## Authentication\nAll API requests require an API key passed in the `x-api-key` header.\n\nGet your free API key at: [dashboard.eva-ai.io](https://dashboard.eva-ai.io)\n\n## Rate Limiting\n- **Authenticated users**: Custom limits based on API key tier (default: 60 requests/minute)\n- **Anonymous users**: 2 requests/minute\n\nRate limit headers are included in responses:\n- `RateLimit-Limit`: Maximum requests allowed\n- `RateLimit-Remaining`: Remaining requests in current window\n- `RateLimit-Reset`: Time when the rate limit resets\n\n## Supported Chains\n\n| Chain ID | Network |\n|----------|----------|\n| 1 | Ethereum Mainnet |\n| 10 | Optimism |\n| 25 | Cronos |\n| 56 | BSC |\n| 130 | Unichain |\n| 137 | Polygon |\n| 143 | Monad |\n| 146 | Sonic |\n| 324 | zkSync |\n| 1101 | Polygon zkEVM |\n| 2741 | Abstract |\n| 8453 | Base |\n| 42161 | Arbitrum One |\n| 42170 | Arbitrum Nova |\n| 42220 | Celo |\n| 43114 | Avalanche |\n| 80094 | Berachain |\n| 81457 | Blast |\n\n## How It Works\n\n1. **Initial Analysis**: When you analyze a token, EVA fetches contract data from the blockchain\n2. **Security Audit**: The contract source code is analyzed for common vulnerabilities and threats\n3. **Similarity Detection**: AI-powered pattern matching identifies similar contracts across all chains\n4. **Caching**: Results are cached for efficiency:\n   - Renounced tokens: 1 hour cache\n   - Active ownership: Re-validates owner before serving cache\n   - Similarity data: Refreshed every 5 minutes",
     "version": "1.0.0",
     "contact": {
       "name": "EVA AI Support",
@@ -28,7 +28,7 @@
     "/evmFullanalyze": {
       "post": {
         "summary": "Full Token Analysis",
-        "description": "Performs a comprehensive security analysis of a smart contract token, including threat detection, security audits, and AI-powered similarity analysis.",
+        "description": "Performs a comprehensive security analysis of a smart contract token, including threat detection, security audits, and AI-powered similarity analysis.\n\n## Best Practices\n\n### 1. Check for Threats\nAlways review the `threats` array before interacting with a token.\n\n### 2. Review Audit Flags\nRed flags (🔴) indicate serious security concerns.\n\n### 3. Handle Rate Limits\nImplement exponential backoff for 429 responses.\n\n### 4. Cache Responses\nResults are cached server-side, but you should also cache on your end to minimize API calls.\n\n### 5. Validate Addresses\nEnsure contract addresses are valid before sending requests to avoid wasting API quota.",
         "operationId": "evmFullAnalyze",
         "requestBody": {
           "description": "Token analysis request parameters",
@@ -38,9 +38,28 @@
               "schema": {
                 "$ref": "#/components/schemas/AnalysisRequest"
               },
-              "example": {
-                "chain": 56,
-                "ca": "0x00e22ed2c31875abaa34ed0659acb76734b9540d"
+              "examples": {
+                "bsc-token": {
+                  "summary": "BSC Token Analysis",
+                  "value": {
+                    "chain": 56,
+                    "ca": "0x00e22ed2c31875abaa34ed0659acb76734b9540d"
+                  }
+                },
+                "ethereum-token": {
+                  "summary": "Ethereum Token Analysis",
+                  "value": {
+                    "chain": 1,
+                    "ca": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+                  }
+                },
+                "base-token": {
+                  "summary": "Base Token Analysis",
+                  "value": {
+                    "chain": 8453,
+                    "ca": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+                  }
+                }
               }
             }
           }
@@ -52,6 +71,88 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AnalysisResponse"
+                },
+                "example": {
+                  "owner": "HIDDEN",
+                  "tokenAddress": "0x00e22ed2c31875abaa34ed0659acb76734b9540d",
+                  "symbol": "TEKE",
+                  "chain": "56",
+                  "initInfo": {
+                    "blockNumber": "69415413",
+                    "contractCreator": "0xd0e4b00687445e8cbbd376243c0e41fc85b220b6",
+                    "txHash": "0x6bcdb3f66193257a1059799852483841dd70feb3e04e564c72812497e971fcb0",
+                    "timestamp": 1764062930
+                  },
+                  "totalSupply": "30000000000000000000000000",
+                  "decimals": "18",
+                  "name": "Akhal Teke",
+                  "age": 1764063134000,
+                  "contractName": "TEKE",
+                  "isProxy": false,
+                  "threats": ["Honeypot", "Shypooning"],
+                  "auditInfo": {
+                    "ownershipStatus": "Active",
+                    "flags": [
+                      {
+                        "category": "Honeypot",
+                        "label": "🔴",
+                        "description": "The contract uses `subSkip` in `transferFrom`, allowing tax wallets to bypass allowance checks, which can be exploited to block transfers."
+                      },
+                      {
+                        "category": "Shypooning",
+                        "label": "🔴",
+                        "description": "The `subSkip` function allows tax wallets to bypass allowance checks, enabling potential fund manipulation."
+                      },
+                      {
+                        "category": "Tax Issue",
+                        "label": "🟢",
+                        "description": ""
+                      },
+                      {
+                        "category": "Other Risks",
+                        "label": "🟢",
+                        "description": ""
+                      }
+                    ]
+                  },
+                  "lastchecked": 1767810740203,
+                  "similarityMap": [
+                    {
+                      "tags": [],
+                      "symbol": "AZZA",
+                      "score": 0.8715265989303589,
+                      "id": "0xc2d49b3358104c764100a3044aefad672ab794da",
+                      "chain": "8453"
+                    },
+                    {
+                      "chain": "56",
+                      "score": 0.8714740872383118,
+                      "id": "0x52a29d7c395b210ce9ad031dff26f181ec0bf5f6",
+                      "tags": ["scam"],
+                      "symbol": "supercycle"
+                    },
+                    {
+                      "symbol": "POND",
+                      "score": 0.870567262172699,
+                      "chain": "8453",
+                      "id": "0xa7e8589e8f4e28300f0b28e6ec8131dd875eb6c1",
+                      "tags": []
+                    },
+                    {
+                      "symbol": "FHE",
+                      "tags": [],
+                      "id": "0x616b4a8fa0f737c7462851d9f19d6561a4a84dba",
+                      "score": 0.8673557043075562,
+                      "chain": "8453"
+                    },
+                    {
+                      "id": "0xdfe5024f0687ba8a42966856d51c8eb60a3c0d69",
+                      "tags": [],
+                      "score": 0.8652318120002747,
+                      "chain": "8453",
+                      "symbol": "XYBER"
+                    }
+                  ]
                 }
               }
             }
@@ -70,7 +171,7 @@
             }
           },
           "404": {
-            "description": "Token not found",
+            "description": "Token not found or could not be fetched from the blockchain",
             "content": {
               "application/json": {
                 "schema": {
@@ -124,14 +225,14 @@
             }
           },
           "500": {
-            "description": "Internal server error",
+            "description": "Internal server error during analysis",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
                 "example": {
-                  "error": "Internal server error"
+                  "error": "Error message describing the issue"
                 }
               }
             }
@@ -148,7 +249,7 @@
         "properties": {
           "chain": {
             "type": "integer",
-            "description": "Chain ID of the blockchain network",
+            "description": "Chain ID of the blockchain network. Supported chains: 1 (Ethereum), 10 (Optimism), 25 (Cronos), 56 (BSC), 130 (Unichain), 137 (Polygon), 143 (Monad), 146 (Sonic), 324 (zkSync), 1101 (Polygon zkEVM), 2741 (Abstract), 8453 (Base), 42161 (Arbitrum One), 42170 (Arbitrum Nova), 42220 (Celo), 43114 (Avalanche), 80094 (Berachain), 81457 (Blast)",
             "enum": [1, 10, 25, 56, 130, 137, 143, 146, 324, 1101, 2741, 8453, 42161, 42170, 42220, 43114, 80094, 81457],
             "example": 56
           },
@@ -225,10 +326,9 @@
           },
           "threats": {
             "type": "array",
-            "description": "Array of detected security threats",
+            "description": "Array of detected security threats. Common threats include 'Honeypot' (contract designed to trap funds) and 'Shypooning' (malicious behavior allowing fund manipulation), but other threat types may be detected.",
             "items": {
-              "type": "string",
-              "enum": ["Honeypot", "Shypooning"]
+              "type": "string"
             },
             "example": ["Honeypot", "Shypooning"]
           },
@@ -237,7 +337,7 @@
           },
           "similarityMap": {
             "type": "array",
-            "description": "Array of up to 5 similar tokens detected through AI analysis",
+            "description": "Array of up to 5 similar tokens detected through AI analysis (limited from full dataset)",
             "maxItems": 5,
             "items": {
               "$ref": "#/components/schemas/SimilarToken"
@@ -247,7 +347,7 @@
       },
       "InitInfo": {
         "type": "object",
-        "description": "Deployment information",
+        "description": "Deployment information for the token contract",
         "properties": {
           "blockNumber": {
             "type": "string",
@@ -278,7 +378,7 @@
         "properties": {
           "ownershipStatus": {
             "type": "string",
-            "description": "Ownership status",
+            "description": "Ownership status of the contract",
             "enum": ["Active", "Renounced"],
             "example": "Active"
           },
@@ -297,7 +397,7 @@
         "properties": {
           "category": {
             "type": "string",
-            "description": "Security category",
+            "description": "Security category being checked",
             "enum": ["Honeypot", "Shypooning", "Tax Issue", "Other Risks"],
             "example": "Honeypot"
           },
@@ -309,14 +409,14 @@
           },
           "description": {
             "type": "string",
-            "description": "Detailed description of the finding (empty if passed)",
+            "description": "Detailed description of the finding. Empty string if the check passed.",
             "example": "The contract uses `subSkip` in `transferFrom`, allowing tax wallets to bypass allowance checks, which can be exploited to block transfers."
           }
         }
       },
       "SimilarToken": {
         "type": "object",
-        "description": "Similar token detected through AI analysis",
+        "description": "Similar token detected through AI-powered pattern matching",
         "properties": {
           "symbol": {
             "type": "string",
@@ -343,7 +443,7 @@
           },
           "tags": {
             "type": "array",
-            "description": "Tags like 'scam', 'verified', etc.",
+            "description": "Tags associated with the token (e.g., 'scam', 'verified')",
             "items": {
               "type": "string"
             },
@@ -357,7 +457,7 @@
         "properties": {
           "error": {
             "type": "string",
-            "description": "Error message"
+            "description": "Error message describing what went wrong"
           }
         }
       },
@@ -372,7 +472,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Request limit",
+            "description": "Request limit that was exceeded",
             "example": 60
           },
           "retryAfter": {
@@ -388,7 +488,7 @@
         "type": "apiKey",
         "in": "header",
         "name": "x-api-key",
-        "description": "API key for authentication. Get your free API key at https://dashboard.eva-ai.io"
+        "description": "API key for authentication. Get your free API key at [dashboard.eva-ai.io](https://dashboard.eva-ai.io)"
       }
     }
   }
