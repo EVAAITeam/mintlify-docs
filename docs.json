@@ -24,15 +24,16 @@
             ]
           },
           {
-      "group": "Products",
-      "pages": [
-        "Products/Instinct",
-        "Products/Intel",
-        {
       "group": "EVA App",
       "pages": [
         "Products/EVA App",
-        "api-reference/evmFullanalyze"
+        {
+          "group": "Developer API",
+          "openapi": {
+            "source": "/openapi.json",
+            "directory": "api-reference"
+          }
+        }
       ]
     }
       ]
