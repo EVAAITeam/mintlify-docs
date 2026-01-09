@@ -24,22 +24,20 @@
             ]
           },
           {
-      {
-  "group": "Products",
-  "pages": [
-    "Products/Instinct",
-    "Products/Intel",
-    "Products/EVA App",
-    {
-      "group": "Developer API",
-      "openapi": {
-        "source": "/openapi.json",
-        "directory": "api-reference"
-      }
-    }
-  ]
-},,
-          
+            "group": "Products",
+            "pages": [
+              "Products/Instinct",
+              "Products/Intel",
+              "Products/EVA App",
+              {
+                "group": "Developer API",
+                "openapi": {
+                  "source": "/openapi.json",
+                  "directory": "api-reference"
+                }
+              }
+            ]
+          },
           {
             "group": "Miscellaneous",
             "pages": [
@@ -94,7 +92,7 @@
     "socials": {
       "x": "https://x.com/eva_ai_2024",
       "telegram": "https://t.me/eva_AI_eth",
-      "website":"https://eva-ai.cloud"
+      "website": "https://eva-ai.cloud"
     }
   }
 }
