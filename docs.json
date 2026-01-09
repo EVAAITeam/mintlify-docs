@@ -27,7 +27,8 @@
       "pages": [
         "Products/Instinct",
         "Products/Intel",
-        "Products/EVA App"
+        "Products/EVA App",
+        "Products/EVA App/Developer API"
       ]
     },
           
@@ -48,17 +49,17 @@
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
+          "href": "https://docs.eva-ai.cloud/",
           "icon": "book-open-cover"
         },
         {
           "anchor": "Telegram",
-          "href": "https://mintlify.com/community",
+          "href": "https://t.me/eva_AI_eth",
           "icon": "telegram"
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://eva-ai.io/blog",
           "icon": "newspaper"
         }
       ]
