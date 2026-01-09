@@ -1,0 +1,395 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "EVA API",
+    "description": "Comprehensive smart contract security analysis API with AI-powered threat detection across 18+ EVM blockchain networks.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "EVA AI Support",
+      "email": "evaaiteam@gmail.com",
+      "url": "https://dashboard.eva-ai.io"
+    },
+    "license": {
+      "name": "Proprietary"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.eva-ai.cloud",
+      "description": "Production server"
+    }
+  ],
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/evmFullanalyze": {
+      "post": {
+        "summary": "Full Token Analysis",
+        "description": "Performs a comprehensive security analysis of a smart contract token, including threat detection, security audits, and AI-powered similarity analysis.",
+        "operationId": "evmFullAnalyze",
+        "requestBody": {
+          "description": "Token analysis request parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisRequest"
+              },
+              "example": {
+                "chain": 56,
+                "ca": "0x00e22ed2c31875abaa34ed0659acb76734b9540d"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful analysis response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Missing required parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Missing chain or contract address"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Token not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Token not found or could not be fetched"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Maximum requests allowed",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Remaining requests in current window",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Time when the rate limit resets",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "description": "Seconds to wait before retrying",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateLimitError"
+                },
+                "example": {
+                  "error": "Too many requests",
+                  "limit": 60,
+                  "retryAfter": "60s"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalysisRequest": {
+        "type": "object",
+        "required": ["chain", "ca"],
+        "properties": {
+          "chain": {
+            "type": "integer",
+            "description": "Chain ID of the blockchain network",
+            "enum": [1, 10, 25, 56, 130, 137, 143, 146, 324, 1101, 2741, 8453, 42161, 42170, 42220, 43114, 80094, 81457],
+            "example": 56
+          },
+          "ca": {
+            "type": "string",
+            "description": "Contract address (checksummed or lowercase)",
+            "pattern": "^0x[a-fA-F0-9]{40}$",
+            "example": "0x00e22ed2c31875abaa34ed0659acb76734b9540d"
+          }
+        }
+      },
+      "AnalysisResponse": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "string",
+            "description": "Current owner address or 'HIDDEN' if renounced",
+            "example": "HIDDEN"
+          },
+          "tokenAddress": {
+            "type": "string",
+            "description": "Contract address",
+            "example": "0x00e22ed2c31875abaa34ed0659acb76734b9540d"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "Token symbol",
+            "example": "TEKE"
+          },
+          "name": {
+            "type": "string",
+            "description": "Token name",
+            "example": "Akhal Teke"
+          },
+          "chain": {
+            "type": "string",
+            "description": "Chain ID",
+            "example": "56"
+          },
+          "decimals": {
+            "type": "string",
+            "description": "Token decimals",
+            "example": "18"
+          },
+          "totalSupply": {
+            "type": "string",
+            "description": "Total token supply in wei",
+            "example": "30000000000000000000000000"
+          },
+          "contractName": {
+            "type": "string",
+            "description": "Contract name from source code",
+            "example": "TEKE"
+          },
+          "isProxy": {
+            "type": "boolean",
+            "description": "Whether contract is a proxy",
+            "example": false
+          },
+          "age": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Token deployment timestamp in milliseconds",
+            "example": 1764063134000
+          },
+          "lastchecked": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Last analysis timestamp in milliseconds",
+            "example": 1767810740203
+          },
+          "initInfo": {
+            "$ref": "#/components/schemas/InitInfo"
+          },
+          "threats": {
+            "type": "array",
+            "description": "Array of detected security threats",
+            "items": {
+              "type": "string",
+              "enum": ["Honeypot", "Shypooning"]
+            },
+            "example": ["Honeypot", "Shypooning"]
+          },
+          "auditInfo": {
+            "$ref": "#/components/schemas/AuditInfo"
+          },
+          "similarityMap": {
+            "type": "array",
+            "description": "Array of up to 5 similar tokens detected through AI analysis",
+            "maxItems": 5,
+            "items": {
+              "$ref": "#/components/schemas/SimilarToken"
+            }
+          }
+        }
+      },
+      "InitInfo": {
+        "type": "object",
+        "description": "Deployment information",
+        "properties": {
+          "blockNumber": {
+            "type": "string",
+            "description": "Block number of deployment",
+            "example": "69415413"
+          },
+          "contractCreator": {
+            "type": "string",
+            "description": "Address that deployed the contract",
+            "example": "0xd0e4b00687445e8cbbd376243c0e41fc85b220b6"
+          },
+          "txHash": {
+            "type": "string",
+            "description": "Deployment transaction hash",
+            "example": "0x6bcdb3f66193257a1059799852483841dd70feb3e04e564c72812497e971fcb0"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Deployment timestamp in Unix seconds",
+            "example": 1764062930
+          }
+        }
+      },
+      "AuditInfo": {
+        "type": "object",
+        "description": "Security audit results",
+        "properties": {
+          "ownershipStatus": {
+            "type": "string",
+            "description": "Ownership status",
+            "enum": ["Active", "Renounced"],
+            "example": "Active"
+          },
+          "flags": {
+            "type": "array",
+            "description": "Array of security check results",
+            "items": {
+              "$ref": "#/components/schemas/AuditFlag"
+            }
+          }
+        }
+      },
+      "AuditFlag": {
+        "type": "object",
+        "description": "Individual security check result",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Security category",
+            "enum": ["Honeypot", "Shypooning", "Tax Issue", "Other Risks"],
+            "example": "Honeypot"
+          },
+          "label": {
+            "type": "string",
+            "description": "Visual indicator: 🔴 = risk detected, 🟢 = passed",
+            "enum": ["🔴", "🟢"],
+            "example": "🔴"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the finding (empty if passed)",
+            "example": "The contract uses `subSkip` in `transferFrom`, allowing tax wallets to bypass allowance checks, which can be exploited to block transfers."
+          }
+        }
+      },
+      "SimilarToken": {
+        "type": "object",
+        "description": "Similar token detected through AI analysis",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Token symbol",
+            "example": "AZZA"
+          },
+          "id": {
+            "type": "string",
+            "description": "Contract address",
+            "example": "0xc2d49b3358104c764100a3044aefad672ab794da"
+          },
+          "chain": {
+            "type": "string",
+            "description": "Chain ID where token exists",
+            "example": "8453"
+          },
+          "score": {
+            "type": "number",
+            "format": "double",
+            "description": "Similarity score (0-1, higher = more similar)",
+            "minimum": 0,
+            "maximum": 1,
+            "example": 0.8715265989303589
+          },
+          "tags": {
+            "type": "array",
+            "description": "Tags like 'scam', 'verified', etc.",
+            "items": {
+              "type": "string"
+            },
+            "example": []
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      },
+      "RateLimitError": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message",
+            "example": "Too many requests"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Request limit",
+            "example": 60
+          },
+          "retryAfter": {
+            "type": "string",
+            "description": "Time to wait before retrying",
+            "example": "60s"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key",
+        "description": "API key for authentication. Get your free API key at https://dashboard.eva-ai.io"
+      }
+    }
+  }
+}

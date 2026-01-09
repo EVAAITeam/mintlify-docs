@@ -2,6 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
   "name": "EVA AI",
+  "openapi": ["/openapi.json"],
   "colors": {
     "primary": "#f7941d",
     "light": "#f7941d",
@@ -31,7 +32,7 @@
       "group": "EVA App",
       "pages": [
         "Products/EVA App",
-        "Products/EVA App/Developer API"
+        "api-reference/evmFullanalyze"
       ]
     }
       ]
