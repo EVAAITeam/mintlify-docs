@@ -24,18 +24,21 @@
             ]
           },
           {
-      "group": "EVA App",
-      "pages": [
-        "Products/EVA App",
-        {
-          "group": "Developer API",
-          "openapi": {
-            "source": "/openapi.json",
-            "directory": "api-reference"
-          }
-        }
-      ]
-    },
+      {
+  "group": "Products",
+  "pages": [
+    "Products/Instinct",
+    "Products/Intel",
+    "Products/EVA App",
+    {
+      "group": "Developer API",
+      "openapi": {
+        "source": "/openapi.json",
+        "directory": "api-reference"
+      }
+    }
+  ]
+},,
           
           {
             "group": "Miscellaneous",
