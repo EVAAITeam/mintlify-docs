@@ -27,8 +27,13 @@
       "pages": [
         "Products/Instinct",
         "Products/Intel",
+        {
+      "group": "EVA App",
+      "pages": [
         "Products/EVA App",
         "Products/EVA App/Developer API"
+      ]
+    }
       ]
     },
           
