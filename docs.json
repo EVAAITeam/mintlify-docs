@@ -31,10 +31,16 @@
               "Products/EVA App",
               {
                 "group": "Developer API",
-                "openapi": {
-                  "source": "/openapi.json",
-                  "directory": "api-reference"
-                }
+                "pages": [
+                  "Products/Developer API/overview",
+                  "Products/Developer API/chains",
+                  {
+                    "group": "Endpoints",
+                    "pages": [
+                      "openapi GET /audit"
+                    ]
+                  }
+                ]
               }
             ]
           },

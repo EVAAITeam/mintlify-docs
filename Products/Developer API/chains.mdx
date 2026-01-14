@@ -1,0 +1,41 @@
+---
+title: "Supported Chains"
+description: "All EVM blockchain networks supported by the EVA API"
+---
+
+EVA API supports security analysis across **18+ EVM-compatible blockchains**.
+
+## Chain Reference
+
+| Chain ID | Network |
+|----------|---------|
+| 1 | Ethereum |
+| 10 | Optimism |
+| 25 | Cronos |
+| 56 | BSC |
+| 130 | Unichain |
+| 137 | Polygon |
+| 143 | Monad |
+| 146 | Sonic |
+| 324 | zkSync |
+| 1101 | Polygon zkEVM |
+| 2741 | Abstract |
+| 8453 | Base |
+| 42161 | Arbitrum One |
+| 42170 | Arbitrum Nova |
+| 42220 | Celo |
+| 43114 | Avalanche |
+| 80094 | Berachain |
+| 81457 | Blast |
+
+## Usage
+
+Pass the chain ID as a query parameter:
+
+```bash
+GET /audit?chain=56&ca=0x...
+```
+
+<Note>
+New chains are added regularly. If you need support for a specific chain, contact us.
+</Note>

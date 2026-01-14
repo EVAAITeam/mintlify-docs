@@ -27,18 +27,17 @@
   "paths": {
     "/audit": {
       "get": {
-        "summary": "Full Token Analysis",
-        "description": "Performs a comprehensive security analysis of a smart contract token, including threat detection, security audits, and AI-powered similarity analysis.\n\n## TTTTTTTTTT\n\n### 1. Check for Threats\nAlways review the `threats` array before interacting with a token.\n\n### 2. Review Audit Flags\nRed flags (🔴) indicate serious security concerns.\n\n### 3. Handle Rate Limits\nImplement exponential backoff for 429 responses.\n\n### 4. Cache Responses\nResults are cached server-side, but you should also cache on your end to minimize API calls.\n\n### 5. Validate Addresses\nEnsure contract addresses are valid before sending requests to avoid wasting API quota.",
-        "operationId": "evmFullAnalyze",
+        "summary": "Audit",
+        "description": "Analyze a smart contract for security threats, vulnerabilities, and similar contracts.",
+        "operationId": "audit",
         "parameters": [
           {
             "name": "chain",
             "in": "query",
             "required": true,
-            "description": "Chain ID of the blockchain network. Supported chains: 1 (Ethereum), 10 (Optimism), 25 (Cronos), 56 (BSC), 130 (Unichain), 137 (Polygon), 143 (Monad), 146 (Sonic), 324 (zkSync), 1101 (Polygon zkEVM), 2741 (Abstract), 8453 (Base), 42161 (Arbitrum One), 42170 (Arbitrum Nova), 42220 (Celo), 43114 (Avalanche), 80094 (Berachain), 81457 (Blast)",
+            "description": "Chain ID (e.g., 1 = Ethereum, 56 = BSC, 8453 = Base)",
             "schema": {
-              "type": "integer",
-              "enum": [1, 10, 25, 56, 130, 137, 143, 146, 324, 1101, 2741, 8453, 42161, 42170, 42220, 43114, 80094, 81457]
+              "type": "integer"
             },
             "example": 56
           },
@@ -46,10 +45,9 @@
             "name": "ca",
             "in": "query",
             "required": true,
-            "description": "Contract address (checksummed or lowercase)",
+            "description": "Contract address",
             "schema": {
-              "type": "string",
-              "pattern": "^0x[a-fA-F0-9]{40}$"
+              "type": "string"
             },
             "example": "0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC"
           }
@@ -68,84 +66,30 @@
                   "decimals": "18",
                   "totalSupply": "1000000000000000000000000000",
                   "owner": "0x0000000000000000000000000000000000000000",
+                  "chain": "56",
+                  "tokenAddress": "0x2c45560bc707f7addb8df848a9ba6cd9f30faeec",
+                  "contractName": "Token",
+                  "isProxy": false,
+                  "age": 1739024784000,
                   "initInfo": {
                     "blockNumber": "46481055",
                     "txHash": "0x65449bf92111b78072e1b232925101fdcb3cdf2a11e41050ccc9b62e853291f6",
                     "contractCreator": "0x3139576ed8e66cddf0be15f755bf5c5ce5b598a8",
                     "timestamp": 1739024562
                   },
-                  "age": 1739024784000,
                   "threats": [],
                   "auditInfo": {
+                    "ownershipStatus": "Renounced",
                     "flags": [
-                      {
-                        "category": "Honeypot",
-                        "label": "🟢",
-                        "description": ""
-                      },
-                      {
-                        "category": "Shypooning",
-                        "label": "🟢",
-                        "description": ""
-                      },
-                      {
-                        "category": "Tax Issue",
-                        "label": "🟢",
-                        "description": ""
-                      },
-                      {
-                        "category": "Other Risks",
-                        "label": "🟢",
-                        "description": ""
-                      }
-                    ],
-                    "ownershipStatus": "Renounced"
+                      { "category": "Honeypot", "label": "🟢", "description": "" },
+                      { "category": "Shypooning", "label": "🟢", "description": "" },
+                      { "category": "Tax Issue", "label": "🟢", "description": "" },
+                      { "category": "Other Risks", "label": "🟢", "description": "" }
+                    ]
                   },
-                  "contractName": "Token",
-                  "isProxy": false,
-                  "chain": "56",
-                  "tokenAddress": "0x2c45560bc707f7addb8df848a9ba6cd9f30faeec",
                   "similarityMap": [
-                    {
-                      "id": "0x628d3ffc9e085c419133274fe984e554b8b4e2ae",
-                      "symbol": "CZBNB",
-                      "chain": "56",
-                      "tags": [],
-                      "score": 0.9488914012908936,
-                      "exactMatch": true
-                    },
-                    {
-                      "id": "0x3a828e1ea6511e367d436c601e14cdb2b446896d",
-                      "symbol": "GATSBY",
-                      "chain": "56",
-                      "tags": [],
-                      "score": 0.8118295669555664,
-                      "exactMatch": false
-                    },
-                    {
-                      "id": "0x00c4027f8b60bc5dc8ecc9420b8346d1b19d4444",
-                      "symbol": "For U",
-                      "chain": "56",
-                      "tags": [],
-                      "score": 0.7707880735397339,
-                      "exactMatch": false
-                    },
-                    {
-                      "id": "0x4a803ce72ae9a7c9a50f37881e8a3e43d3904444",
-                      "symbol": "H",
-                      "chain": "56",
-                      "tags": [],
-                      "score": 0.7707880735397339,
-                      "exactMatch": false
-                    },
-                    {
-                      "id": "0xf7ed52010a766164262f79a340c3868817174444",
-                      "symbol": "赛季",
-                      "chain": "56",
-                      "tags": [],
-                      "score": 0.7707880735397339,
-                      "exactMatch": false
-                    }
+                    { "id": "0x628d3ffc9e085c419133274fe984e554b8b4e2ae", "symbol": "CZBNB", "chain": "56", "score": 0.95, "exactMatch": true, "tags": [] },
+                    { "id": "0x3a828e1ea6511e367d436c601e14cdb2b446896d", "symbol": "GATSBY", "chain": "56", "score": 0.81, "exactMatch": false, "tags": [] }
                   ]
                 }
               }
