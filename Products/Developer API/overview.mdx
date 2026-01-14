@@ -13,29 +13,30 @@ https://dashboard.eva-ai.io/api
 
 ## Authentication
 
-All requests require an API key in the header:
+The API key is **optional**. Pass it in the header to get higher rate limits:
 
 ```
 x-api-key: YOUR_API_KEY
 ```
 
-<Card title="Get Your API Key" icon="key" href="https://dashboard.eva-ai.io">
-  Sign up at the EVA Dashboard to get your free API key.
-</Card>
-
 ## Rate Limits
 
 | Type | Limit |
 |------|-------|
-| Authenticated | 60 requests/minute |
-| Anonymous | 2 requests/minute |
+| Without API key | 1 request/minute |
+| With API key | 60 requests/minute |
 
-Rate limit headers included in responses:
-- `RateLimit-Limit` - Maximum requests allowed
-- `RateLimit-Remaining` - Remaining requests
-- `RateLimit-Reset` - Reset time
+<Card title="Get Your API Key" icon="key" href="https://dashboard.eva-ai.io">
+  Login at the EVA Dashboard to get your API key.
+</Card>
 
 ## Quick Example
+
+```bash
+curl "https://dashboard.eva-ai.io/api/audit?chain=56&ca=0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC"
+```
+
+With API key:
 
 ```bash
 curl "https://dashboard.eva-ai.io/api/audit?chain=56&ca=0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC" \

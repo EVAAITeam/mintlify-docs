@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "EVA API",
-    "description": "Comprehensive smart contract security analysis API with AI-powered threat detection across 18+ EVM blockchain networks.\n\n## Authentication\nAll API requests require an API key passed in the `x-api-key` header.\n\nGet your free API key at: [dashboard.eva-ai.io](https://dashboard.eva-ai.io)\n\n## Rate Limiting\n- **Authenticated users**: Custom limits based on API key tier (default: 60 requests/minute)\n- **Anonymous users**: 2 requests/minute\n\nRate limit headers are included in responses:\n- `RateLimit-Limit`: Maximum requests allowed\n- `RateLimit-Remaining`: Remaining requests in current window\n- `RateLimit-Reset`: Time when the rate limit resets\n\n## Supported Chains\n\n| Chain ID | Network |\n|----------|----------|\n| 1 | Ethereum Mainnet |\n| 10 | Optimism |\n| 25 | Cronos |\n| 56 | BSC |\n| 130 | Unichain |\n| 137 | Polygon |\n| 143 | Monad |\n| 146 | Sonic |\n| 324 | zkSync |\n| 1101 | Polygon zkEVM |\n| 2741 | Abstract |\n| 8453 | Base |\n| 42161 | Arbitrum One |\n| 42170 | Arbitrum Nova |\n| 42220 | Celo |\n| 43114 | Avalanche |\n| 80094 | Berachain |\n| 81457 | Blast |\n\n## How It Works\n\n1. **Initial Analysis**: When you analyze a token, EVA fetches contract data from the blockchain\n2. **Security Audit**: The contract source code is analyzed for common vulnerabilities and threats\n3. **Similarity Detection**: AI-powered pattern matching identifies similar contracts across all chains\n4. **Caching**: Results are cached for efficiency:\n   - Renounced tokens: 1 hour cache\n   - Active ownership: Re-validates owner before serving cache\n   - Similarity data: Refreshed every 5 minutes",
+    "description": "Smart contract security analysis API with AI-powered threat detection across 18+ EVM blockchain networks.",
     "version": "1.0.0",
     "contact": {
       "name": "EVA AI Support",
@@ -19,11 +19,7 @@
       "description": "Production server"
     }
   ],
-  "security": [
-    {
-      "apiKeyAuth": []
-    }
-  ],
+  "security": [],
   "paths": {
     "/audit": {
       "get": {
@@ -34,17 +30,17 @@
           {
             "lang": "curl",
             "label": "cURL",
-            "source": "curl 'https://dashboard.eva-ai.io/api/audit?chain=56&ca=0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC' \\\n  -H 'x-api-key: YOUR_API_KEY'"
+            "source": "curl 'https://dashboard.eva-ai.io/api/audit?chain=56&ca=0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC'"
           },
           {
             "lang": "javascript",
             "label": "JavaScript",
-            "source": "const response = await fetch(\n  'https://dashboard.eva-ai.io/api/audit?chain=56&ca=0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC',\n  {\n    headers: { 'x-api-key': 'YOUR_API_KEY' }\n  }\n);\nconst data = await response.json();"
+            "source": "const response = await fetch(\n  'https://dashboard.eva-ai.io/api/audit?chain=56&ca=0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC'\n);\nconst data = await response.json();"
           },
           {
             "lang": "python",
             "label": "Python",
-            "source": "import requests\n\nresponse = requests.get(\n    'https://dashboard.eva-ai.io/api/audit',\n    params={'chain': 56, 'ca': '0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC'},\n    headers={'x-api-key': 'YOUR_API_KEY'}\n)\ndata = response.json()"
+            "source": "import requests\n\nresponse = requests.get(\n    'https://dashboard.eva-ai.io/api/audit',\n    params={'chain': 56, 'ca': '0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC'}\n)\ndata = response.json()"
           }
         ],
         "parameters": [
@@ -423,14 +419,6 @@
             "example": "60s"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "x-api-key",
-        "description": "API key for authentication. Get your free API key at [dashboard.eva-ai.io](https://dashboard.eva-ai.io)"
       }
     }
   }
