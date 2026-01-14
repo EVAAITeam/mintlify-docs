@@ -28,7 +28,7 @@
     "/audit": {
       "get": {
         "summary": "Full Token Analysis",
-        "description": "Performs a comprehensive security analysis of a smart contract token, including threat detection, security audits, and AI-powered similarity analysis.\n\n## Best Practices\n\n### 1. Check for Threats\nAlways review the `threats` array before interacting with a token.\n\n### 2. Review Audit Flags\nRed flags (🔴) indicate serious security concerns.\n\n### 3. Handle Rate Limits\nImplement exponential backoff for 429 responses.\n\n### 4. Cache Responses\nResults are cached server-side, but you should also cache on your end to minimize API calls.\n\n### 5. Validate Addresses\nEnsure contract addresses are valid before sending requests to avoid wasting API quota.",
+        "description": "Performs a comprehensive security analysis of a smart contract token, including threat detection, security audits, and AI-powered similarity analysis.\n\n## TTTTTTTTTT\n\n### 1. Check for Threats\nAlways review the `threats` array before interacting with a token.\n\n### 2. Review Audit Flags\nRed flags (🔴) indicate serious security concerns.\n\n### 3. Handle Rate Limits\nImplement exponential backoff for 429 responses.\n\n### 4. Cache Responses\nResults are cached server-side, but you should also cache on your end to minimize API calls.\n\n### 5. Validate Addresses\nEnsure contract addresses are valid before sending requests to avoid wasting API quota.",
         "operationId": "evmFullAnalyze",
         "parameters": [
           {
