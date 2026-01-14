@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "https://api.eva-ai.cloud",
+      "url": "https://api.eva-ai.io",
       "description": "Production server"
     }
   ],
@@ -25,45 +25,35 @@
     }
   ],
   "paths": {
-    "/evmFullanalyze": {
-      "post": {
+    "/evmFullanalyze/audit": {
+      "get": {
         "summary": "Full Token Analysis",
         "description": "Performs a comprehensive security analysis of a smart contract token, including threat detection, security audits, and AI-powered similarity analysis.\n\n## Best Practices\n\n### 1. Check for Threats\nAlways review the `threats` array before interacting with a token.\n\n### 2. Review Audit Flags\nRed flags (🔴) indicate serious security concerns.\n\n### 3. Handle Rate Limits\nImplement exponential backoff for 429 responses.\n\n### 4. Cache Responses\nResults are cached server-side, but you should also cache on your end to minimize API calls.\n\n### 5. Validate Addresses\nEnsure contract addresses are valid before sending requests to avoid wasting API quota.",
         "operationId": "evmFullAnalyze",
-        "requestBody": {
-          "description": "Token analysis request parameters",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AnalysisRequest"
-              },
-              "examples": {
-                "bsc-token": {
-                  "summary": "BSC Token Analysis",
-                  "value": {
-                    "chain": 56,
-                    "ca": "0x00e22ed2c31875abaa34ed0659acb76734b9540d"
-                  }
-                },
-                "ethereum-token": {
-                  "summary": "Ethereum Token Analysis",
-                  "value": {
-                    "chain": 1,
-                    "ca": "0xdac17f958d2ee523a2206206994597c13d831ec7"
-                  }
-                },
-                "base-token": {
-                  "summary": "Base Token Analysis",
-                  "value": {
-                    "chain": 8453,
-                    "ca": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "name": "chain",
+            "in": "query",
+            "required": true,
+            "description": "Chain ID of the blockchain network. Supported chains: 1 (Ethereum), 10 (Optimism), 25 (Cronos), 56 (BSC), 130 (Unichain), 137 (Polygon), 143 (Monad), 146 (Sonic), 324 (zkSync), 1101 (Polygon zkEVM), 2741 (Abstract), 8453 (Base), 42161 (Arbitrum One), 42170 (Arbitrum Nova), 42220 (Celo), 43114 (Avalanche), 80094 (Berachain), 81457 (Blast)",
+            "schema": {
+              "type": "integer",
+              "enum": [1, 10, 25, 56, 130, 137, 143, 146, 324, 1101, 2741, 8453, 42161, 42170, 42220, 43114, 80094, 81457]
+            },
+            "example": 56
+          },
+          {
+            "name": "ca",
+            "in": "query",
+            "required": true,
+            "description": "Contract address (checksummed or lowercase)",
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "example": "0x2C45560bC707f7aDDb8dF848A9Ba6cd9F30FAEeC"
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Successful analysis response",
@@ -73,35 +63,30 @@
                   "$ref": "#/components/schemas/AnalysisResponse"
                 },
                 "example": {
-                  "owner": "HIDDEN",
-                  "tokenAddress": "0x00e22ed2c31875abaa34ed0659acb76734b9540d",
-                  "symbol": "TEKE",
-                  "chain": "56",
-                  "initInfo": {
-                    "blockNumber": "69415413",
-                    "contractCreator": "0xd0e4b00687445e8cbbd376243c0e41fc85b220b6",
-                    "txHash": "0x6bcdb3f66193257a1059799852483841dd70feb3e04e564c72812497e971fcb0",
-                    "timestamp": 1764062930
-                  },
-                  "totalSupply": "30000000000000000000000000",
+                  "name": "Giggle Mascot",
+                  "symbol": "Max",
                   "decimals": "18",
-                  "name": "Akhal Teke",
-                  "age": 1764063134000,
-                  "contractName": "TEKE",
-                  "isProxy": false,
-                  "threats": ["Honeypot", "Shypooning"],
+                  "totalSupply": "1000000000000000000000000000",
+                  "owner": "0x0000000000000000000000000000000000000000",
+                  "initInfo": {
+                    "blockNumber": "46481055",
+                    "txHash": "0x65449bf92111b78072e1b232925101fdcb3cdf2a11e41050ccc9b62e853291f6",
+                    "contractCreator": "0x3139576ed8e66cddf0be15f755bf5c5ce5b598a8",
+                    "timestamp": 1739024562
+                  },
+                  "age": 1739024784000,
+                  "threats": [],
                   "auditInfo": {
-                    "ownershipStatus": "Active",
                     "flags": [
                       {
                         "category": "Honeypot",
-                        "label": "🔴",
-                        "description": "The contract uses `subSkip` in `transferFrom`, allowing tax wallets to bypass allowance checks, which can be exploited to block transfers."
+                        "label": "🟢",
+                        "description": ""
                       },
                       {
                         "category": "Shypooning",
-                        "label": "🔴",
-                        "description": "The `subSkip` function allows tax wallets to bypass allowance checks, enabling potential fund manipulation."
+                        "label": "🟢",
+                        "description": ""
                       },
                       {
                         "category": "Tax Issue",
@@ -113,44 +98,53 @@
                         "label": "🟢",
                         "description": ""
                       }
-                    ]
+                    ],
+                    "ownershipStatus": "Renounced"
                   },
-                  "lastchecked": 1767810740203,
+                  "contractName": "Token",
+                  "isProxy": false,
+                  "chain": "56",
+                  "tokenAddress": "0x2c45560bc707f7addb8df848a9ba6cd9f30faeec",
                   "similarityMap": [
                     {
-                      "tags": [],
-                      "symbol": "AZZA",
-                      "score": 0.8715265989303589,
-                      "id": "0xc2d49b3358104c764100a3044aefad672ab794da",
-                      "chain": "8453"
-                    },
-                    {
+                      "id": "0x628d3ffc9e085c419133274fe984e554b8b4e2ae",
+                      "symbol": "CZBNB",
                       "chain": "56",
-                      "score": 0.8714740872383118,
-                      "id": "0x52a29d7c395b210ce9ad031dff26f181ec0bf5f6",
-                      "tags": ["scam"],
-                      "symbol": "supercycle"
-                    },
-                    {
-                      "symbol": "POND",
-                      "score": 0.870567262172699,
-                      "chain": "8453",
-                      "id": "0xa7e8589e8f4e28300f0b28e6ec8131dd875eb6c1",
-                      "tags": []
-                    },
-                    {
-                      "symbol": "FHE",
                       "tags": [],
-                      "id": "0x616b4a8fa0f737c7462851d9f19d6561a4a84dba",
-                      "score": 0.8673557043075562,
-                      "chain": "8453"
+                      "score": 0.9488914012908936,
+                      "exactMatch": true
                     },
                     {
-                      "id": "0xdfe5024f0687ba8a42966856d51c8eb60a3c0d69",
+                      "id": "0x3a828e1ea6511e367d436c601e14cdb2b446896d",
+                      "symbol": "GATSBY",
+                      "chain": "56",
                       "tags": [],
-                      "score": 0.8652318120002747,
-                      "chain": "8453",
-                      "symbol": "XYBER"
+                      "score": 0.8118295669555664,
+                      "exactMatch": false
+                    },
+                    {
+                      "id": "0x00c4027f8b60bc5dc8ecc9420b8346d1b19d4444",
+                      "symbol": "For U",
+                      "chain": "56",
+                      "tags": [],
+                      "score": 0.7707880735397339,
+                      "exactMatch": false
+                    },
+                    {
+                      "id": "0x4a803ce72ae9a7c9a50f37881e8a3e43d3904444",
+                      "symbol": "H",
+                      "chain": "56",
+                      "tags": [],
+                      "score": 0.7707880735397339,
+                      "exactMatch": false
+                    },
+                    {
+                      "id": "0xf7ed52010a766164262f79a340c3868817174444",
+                      "symbol": "赛季",
+                      "chain": "56",
+                      "tags": [],
+                      "score": 0.7707880735397339,
+                      "exactMatch": false
                     }
                   ]
                 }
@@ -243,24 +237,6 @@
   },
   "components": {
     "schemas": {
-      "AnalysisRequest": {
-        "type": "object",
-        "required": ["chain", "ca"],
-        "properties": {
-          "chain": {
-            "type": "integer",
-            "description": "Chain ID of the blockchain network. Supported chains: 1 (Ethereum), 10 (Optimism), 25 (Cronos), 56 (BSC), 130 (Unichain), 137 (Polygon), 143 (Monad), 146 (Sonic), 324 (zkSync), 1101 (Polygon zkEVM), 2741 (Abstract), 8453 (Base), 42161 (Arbitrum One), 42170 (Arbitrum Nova), 42220 (Celo), 43114 (Avalanche), 80094 (Berachain), 81457 (Blast)",
-            "enum": [1, 10, 25, 56, 130, 137, 143, 146, 324, 1101, 2741, 8453, 42161, 42170, 42220, 43114, 80094, 81457],
-            "example": 56
-          },
-          "ca": {
-            "type": "string",
-            "description": "Contract address (checksummed or lowercase)",
-            "pattern": "^0x[a-fA-F0-9]{40}$",
-            "example": "0x00e22ed2c31875abaa34ed0659acb76734b9540d"
-          }
-        }
-      },
       "AnalysisResponse": {
         "type": "object",
         "properties": {
@@ -440,6 +416,11 @@
             "minimum": 0,
             "maximum": 1,
             "example": 0.8715265989303589
+          },
+          "exactMatch": {
+            "type": "boolean",
+            "description": "Whether this is an exact code match",
+            "example": false
           },
           "tags": {
             "type": "array",
